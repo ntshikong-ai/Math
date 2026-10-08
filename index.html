@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PRÉPA EXCELLENTIA — 100 QCM MATHÉMATIQUES</title>
+
+<style>
+:root{
+  --navy:#0b1736;
+  --blue:#2563eb;
+  --violet:#7c3aed;
+  --green:#10b981;
+  --red:#dc2626;
+  --orange:#f59e0b;
+  --bg:#f4f7fb;
+  --white:#fff;
+  --text:#172033;
+  --muted:#64748b;
+  --border:#e2e8f0;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+header{
+  background:linear-gradient(135deg,#0b1736,#182d68);
+  color:white;
+  padding:16px 20px;
+  position:sticky;
+  top:0;
+  z-index:20;
+  box-shadow:0 3px 15px rgba(0,0,0,.15);
+}
+
+.header-inner{
+  max-width:1000px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.brand{
+  font-weight:900;
+  letter-spacing:.5px;
+}
+
+.brand small{
+  display:block;
+  opacity:.7;
+  font-size:11px;
+  margin-top:3px;
+}
+
+.timer-box{
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.2);
+  padding:8px 13px;
+  border-radius:10px;
+  font-weight:bold;
+  white-space:nowrap;
+}
+
+.progress{
+  height:5px;
+  background:rgba(255,255,255,.2);
+  margin-top:12px;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:#10b981;
+  transition:.25s;
+}
+
+.container{
+  max-width:1000px;
+  margin:30px auto;
+  padding:0 16px;
+}
+
+.card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:28px;
+  box-shadow:0 8px 30px rgba(15,23,42,.06);
+}
+
+.home{
+  text-align:center;
+  padding:45px 25px;
+}
+
+.logo{
+  width:75px;
+  height:75px;
+  margin:0 auto 20px;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,var(--blue),var(--violet));
+  color:white;
+  font-size:24px;
+  font-weight:900;
+  box-shadow:0 10px 25px rgba(37,99,235,.25);
+}
+
+h1{
+  margin:0 0 10px;
+  font-size:30px;
+}
+
+.subtitle{
+  color:var(--muted);
+  line-height:1.6;
+}
+
+input{
+  width:100%;
+  max-width:500px;
+  padding:15px;
+  border:2px solid var(--border);
+  border-radius:12px;
+  font-size:16px;
+  margin:20px 0 15px;
+  outline:none;
+}
+
+input:focus{
+  border-color:var(--blue);
+}
+
+button{
+  border:0;
+  cursor:pointer;
+  border-radius:11px;
+  padding:13px 20px;
+  font-size:15px;
+  font-weight:700;
+}
+
+.primary{
+  background:linear-gradient(135deg,var(--blue),var(--violet));
+  color:white;
+  box-shadow:0 6px 18px rgba(37,99,235,.22);
+}
+
+.primary:hover{transform:translateY(-1px)}
+
+.question-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  margin-bottom:22px;
+}
+
+.badge{
+  display:inline-block;
+  background:#eef2ff;
+  color:#3730a3;
+  padding:7px 11px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.q-number{
+  color:var(--muted);
+  font-weight:bold;
+}
+
+.question{
+  font-size:21px;
+  line-height:1.5;
+  font-weight:700;
+  margin:15px 0 25px;
+}
+
+.option{
+  width:100%;
+  text-align:left;
+  background:#fff;
+  border:2px solid var(--border);
+  margin:9px 0;
+  padding:15px;
+  border-radius:12px;
+  color:var(--text);
+  transition:.15s;
+}
+
+.option:hover{
+  border-color:#93c5fd;
+  background:#f8fbff;
+}
+
+.option.selected{
+  border-color:var(--blue);
+  background:#eff6ff;
+}
+
+.option-letter{
+  display:inline-flex;
+  width:30px;
+  height:30px;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#e2e8f0;
+  margin-right:9px;
+  font-weight:900;
+}
+
+.selected .option-letter{
+  background:var(--blue);
+  color:white;
+}
+
+.actions{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:25px;
+}
+
+.secondary{
+  background:#e2e8f0;
+  color:#172033;
+}
+
+.danger{
+  color:var(--red);
+}
+
+.hidden{display:none!important}
+
+.result-score{
+  text-align:center;
+  padding:25px;
+  background:linear-gradient(135deg,#eff6ff,#f5f3ff);
+  border-radius:16px;
+  margin-bottom:25px;
+}
+
+.score-big{
+  font-size:52px;
+  font-weight:900;
+  color:var(--blue);
+}
+
+.subject-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:20px 0;
+}
+
+.subject{
+  padding:15px;
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:12px;
+  text-align:center;
+}
+
+.subject strong{
+  display:block;
+  font-size:23px;
+  margin-bottom:5px;
+}
+
+.error{
+  border-left:5px solid var(--red);
+  background:#fff7f7;
+  padding:16px;
+  border-radius:10px;
+  margin:12px 0;
+}
+
+.correct{
+  color:var(--green);
+  font-weight:bold;
+}
+
+.your-answer{
+  color:var(--red);
+  font-weight:bold;
+}
+
+.explanation{
+  color:#475569;
+  margin-top:8px;
+  line-height:1.5;
+}
+
+.section-title{
+  margin:35px 0 15px;
+  padding-bottom:10px;
+  border-bottom:2px solid var(--border);
+}
+
+.info{
+  background:#eff6ff;
+  border-left:4px solid var(--blue);
+  padding:14px;
+  border-radius:9px;
+  color:#1e3a8a;
+  line-height:1.5;
+  margin:20px 0;
+}
+
+@media(max-width:700px){
+  .header-inner{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .timer-box{
+    width:100%;
+    text-align:center;
+  }
+
+  .card{
+    padding:20px 15px;
+  }
+
+  h1{
+    font-size:24px;
+  }
+
+  .question{
+    font-size:19px;
+  }
+
+  .subject-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .actions{
+    flex-direction:column;
+  }
+
+  .actions button{
+    width:100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header id="header" class="hidden">
+  <div class="header-inner">
+    <div class="brand">
+      PRÉPA EXCELLENTIA
+      <small>100 QCM — MATHÉMATIQUES</small>
+    </div>
+    <div class="timer-box">
+      ⏱ Question : <span id="questionTimer">01:00</span>
+      &nbsp; | &nbsp;
+      Total : <span id="globalTimer">00:00</span>
+    </div>
+  </div>
+  <div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+</header>
+
+<main class="container">
+
+<section id="home" class="card home">
+  <div class="logo">N</div>
+
+  <h1>TEST BLANC EXCELLENTIA</h1>
+
+  <p class="subtitle">
+    <strong>100 QUESTIONS — MATHÉMATIQUES</strong><br>
+    Niveau moyen • Calcul • Analyse • Géométrie • Trigonométrie • Probabilités • Logique • Suites
+  </p>
+
+  <div class="info">
+    Une seule bonne réponse par question.<br>
+    Chaque question dispose de <strong>60 secondes</strong>.<br>
+    Tu ne peux pas revenir à une question précédente.
+  </div>
+
+  <input id="candidate" type="text" placeholder="Entre ton nom complet">
+
+  <br>
+
+  <button class="primary" onclick="startTest()">
+    COMMENCER LE TEST
+  </button>
+</section>
+
+
+<section id="quiz" class="card hidden">
+
+  <div class="question-top">
+    <span class="badge" id="sectionBadge">Mathématiques</span>
+    <span class="q-number" id="qNumber"></span>
+  </div>
+
+  <div class="question" id="questionText"></div>
+
+  <div id="options"></div>
+
+  <div class="actions">
+    <button class="secondary" onclick="nextQuestion()" id="nextBtn">
+      QUESTION SUIVANTE →
+    </button>
+  </div>
+
+</section>
+
+
+<section id="result" class="card hidden">
+  <div id="resultContent"></div>
+</section>
+
+</main>
+
+
+<script>
+
+/* ============================================================
+   100 QUESTIONS — MATHÉMATIQUES
+   ============================================================ */
+
+const questions = [
+
+/* ============================================================
+   1–10 : CALCUL LITTÉRAL, POLYNÔMES, FACTORISATION, SIGNES
+   ============================================================ */
+
+{
+section:"1. Calcul littéral, polynômes, factorisation, signes",
+q:"Développer (x + 3)(x + 5) donne :",
+c:["x² + 8x + 15","x² + 15x + 8","x² + 2x + 15","x² + 8x + 8"],
+a:0,
+e:"(x+3)(x+5)=x²+5x+3x+15=x²+8x+15."
+},
+
+{
+section:"1. Calcul littéral, polynômes, factorisation, signes",
+q:"Réduire 3x + 5 - 2x + 7 donne :",
+c:["x + 12","5x + 12","x + 2","x + 35"],
+a:0,
+e:"3x−2x=x et 5+7=12, donc x+12."
+},
+
+{
+section:"1. Calcul littéral, polynômes, factorisation, signes",
+q:"Factoriser x² - 9 :",
+c:["(x-3)(x+3)","(x-9)(x+1)","(x-3)²","(x+9)(x-1)"],
+a:0,
+e:"x²−9=x²−3²=(x−3)(x+3)."
+},
+
+{
+section:"1. Calcul littéral, polynômes, factorisation, signes",
+q:"Factoriser 5x + 15 :",
+c:["5(x+3)","5(x+15)","x(5+15)","15(x+5)"],
+a:0,
+e:"Le facteur commun est 5 : 5x+15=5(x+3)."
+},
+
+{
+section:"1. Calcul littéral, polynômes, factorisation, signes",
+q:"Le signe de (x - 4) est négatif lorsque :",
+c:["x < 4","x > 4","x = 4","x ≤ 4"],
+a:0,
+e:"x−4<0 lorsque x<4."
+},
+
+{
+section:"1. Calcul littéral, polynômes, factorisation, signes",
+q:"Les racines de x² - 5x + 6 sont :",
+c:["2 et 3","-2 et -3","1 et 6","-1 et -6"],
+a:0,
+e:"x²−5x+6=(x−2)(x−3)."
+},
+
+{
+section:"1. Calcul littéral, polynômes, factorisation, signes",
+q:"Pour x = -2, la valeur de x² + 3x est :",
+c:["-2","2","10","-10"],
+a:0,
+e:"(-2)²+3(-2)=4−6=−2."
+},
+
+{
+section:"1. Calcul littéral, polynômes, factorisation, signes",
+q:"Quel est le degré du polynôme 7x⁴ - 2x² + 3x - 1 ?",
+c:["4","3","2","1"],
+a:0,
+e:"Le plus grand exposant de x est 4."
+},
+
+{
+section:"1. Calcul littéral, polynômes, factorisation, signes",
+q:"Factoriser x² + 6x + 9 :",
+c:["(x+3)²","(x-3)²","(x+9)²","(x+6)²"],
+a:0,
+e:"x²+6x+9=x²+2×3x+3²=(x+3)²."
+},
+
+{
+section:"1. Calcul littéral, polynômes, factorisation, signes",
+q:"Le signe de (x-2)(x+1) est négatif pour :",
+c:["-1 < x < 2","x < -1","x > 2","x < 2"],
+a:0,
+e:"Le produit est négatif entre les deux racines -1 et 2."
+},
+
+
+/* ============================================================
+   11–18 : EXPRESSIONS RATIONNELLES & CONDITIONS D'EXISTENCE
+   ============================================================ */
+
+{
+section:"2. Expressions rationnelles & conditions d’existence",
+q:"Pour quelle valeur x l'expression 1/(x-3) n'est-elle pas définie ?",
+c:["x=3","x=-3","x=0","x=1"],
+a:0,
+e:"Le dénominateur ne doit jamais être nul : x−3≠0, donc x≠3."
+},
+
+{
+section:"2. Expressions rationnelles & conditions d’existence",
+q:"La condition d'existence de 5/(2x+4) est :",
+c:["x ≠ -2","x ≠ 2","x ≠ -4","x ≠ 4"],
+a:0,
+e:"2x+4≠0 donne x≠−2."
+},
+
+{
+section:"2. Expressions rationnelles & conditions d’existence",
+q:"Simplifier (x²-9)/(x-3), avec x≠3 :",
+c:["x+3","x-3","x²-3","3x"],
+a:0,
+e:"x²−9=(x−3)(x+3), donc le quotient vaut x+3 pour x≠3."
+},
+
+{
+section:"2. Expressions rationnelles & conditions d’existence",
+q:"La condition d'existence de 1/(x²-9) est :",
+c:["x≠-3 et x≠3","x≠9","x≠-9","x≠0"],
+a:0,
+e:"x²−9=(x−3)(x+3), donc x ne peut être égal à 3 ou -3."
+},
+
+{
+section:"2. Expressions rationnelles & conditions d’existence",
+q:"Simplifier 6x/(3x), avec x≠0 :",
+c:["2","3","2x","6"],
+a:0,
+e:"6x/(3x)=2 après simplification par 3x, avec x≠0."
+},
+
+{
+section:"2. Expressions rationnelles & conditions d’existence",
+q:"La condition d'existence de √(x-5) est :",
+c:["x ≥ 5","x > 5","x ≤ 5","x ≥ -5"],
+a:0,
+e:"Sous une racine carrée, le radicand doit être positif ou nul : x−5≥0."
+},
+
+{
+section:"2. Expressions rationnelles & conditions d’existence",
+q:"Pour 1/(x²+x), les valeurs interdites sont :",
+c:["0 et -1","0 et 1","1 et -1","2 et -2"],
+a:0,
+e:"x²+x=x(x+1), donc x≠0 et x≠−1."
+},
+
+{
+section:"2. Expressions rationnelles & conditions d’existence",
+q:"Simplifier (x²-4)/(x+2), avec x≠-2 :",
+c:["x-2","x+2","x²-2","2x"],
+a:0,
+e:"x²−4=(x−2)(x+2), donc le quotient vaut x−2."
+},
+
+
+/* ============================================================
+   19–28 : FONCTIONS & DOMAINES
+   ============================================================ */
+
+{
+section:"3. Fonctions & domaine de définition",
+q:"Le domaine de définition de f(x)=1/(x-2) est :",
+c:["R\\{2}","R\\{-2}","R","[2,+∞["],
+a:0,
+e:"Le dénominateur x−2 doit être non nul, donc x≠2."
+},
+
+{
+section:"3. Fonctions & domaine de définition",
+q:"Le domaine de définition de f(x)=√(x+3) est :",
+c:["[-3,+∞[","]-3,+∞[","]-∞,-3]","R"],
+a:0,
+e:"x+3≥0, donc x≥−3."
+},
+
+{
+section:"3. Fonctions & domaine de définition",
+q:"Si f(x)=2x+1, alors f(3) vaut :",
+c:["7","6","5","8"],
+a:0,
+e:"f(3)=2×3+1=7."
+},
+
+{
+section:"3. Fonctions & domaine de définition",
+q:"Si f(x)=x²-4, les antécédents de 0 sont :",
+c:["-2 et 2","0 et 4","-4 et 4","2 seulement"],
+a:0,
+e:"x²−4=0 donne x²=4, donc x=−2 ou x=2."
+},
+
+{
+section:"3. Fonctions & domaine de définition",
+q:"Une fonction f est paire si :",
+c:["f(-x)=f(x)","f(-x)=-f(x)","f(x)=0","f(x)=1"],
+a:0,
+e:"C'est la définition d'une fonction paire."
+},
+
+{
+section:"3. Fonctions & domaine de définition",
+q:"Une fonction f est impaire si :",
+c:["f(-x)=-f(x)","f(-x)=f(x)","f(x)=x²","f(x)>0"],
+a:0,
+e:"C'est la définition d'une fonction impaire."
+},
+
+{
+section:"3. Fonctions & domaine de définition",
+q:"Si f(x)=x+2 et g(x)=3x, alors f(g(x)) vaut :",
+c:["3x+2","3x+6","x+6","3x²+2"],
+a:0,
+e:"f(g(x))=f(3x)=3x+2."
+},
+
+{
+section:"3. Fonctions & domaine de définition",
+q:"Si f(x)=x² et g(x)=x+1, alors g(f(2)) vaut :",
+c:["5","9","4","3"],
+a:0,
+e:"f(2)=4 puis g(4)=5."
+},
+
+{
+section:"3. Fonctions & domaine de définition",
+q:"La fonction f(x)=x³ est :",
+c:["impaire","paire","constante","périodique de période 2"],
+a:0,
+e:"f(−x)=−x³=−f(x), donc elle est impaire."
+},
+
+{
+section:"3. Fonctions & domaine de définition",
+q:"La fonction f(x)=x² possède un minimum égal à :",
+c:["0","1","-1","2"],
+a:0,
+e:"x²≥0 pour tout réel x, et x²=0 pour x=0."
+},
+
+
+/* ============================================================
+   29–38 : LIMITES & ASYMPTOTES
+   ============================================================ */
+
+{
+section:"4. Limites & asymptotes",
+q:"lim(x→2) (x+3) vaut :",
+c:["5","2","3","0"],
+a:0,
+e:"Une fonction polynomiale est continue : on remplace x par 2."
+},
+
+{
+section:"4. Limites & asymptotes",
+q:"lim(x→+∞) (3x+1) vaut :",
+c:["+∞","-∞","1","3"],
+a:0,
+e:"3x tend vers +∞ lorsque x tend vers +∞."
+},
+
+{
+section:"4. Limites & asymptotes",
+q:"lim(x→+∞) 1/x vaut :",
+c:["0","+∞","1","-∞"],
+a:0,
+e:"Plus x devient grand, plus 1/x se rapproche de 0."
+},
+
+{
+section:"4. Limites & asymptotes",
+q:"La fonction f(x)=1/(x-2) possède une asymptote verticale d'équation :",
+c:["x=2","y=2","x=-2","y=-2"],
+a:0,
+e:"Le dénominateur s'annule en x=2."
+},
+
+{
+section:"4. Limites & asymptotes",
+q:"Pour f(x)=1/x, l'axe des ordonnées est une asymptote :",
+c:["verticale","horizontale","oblique","aucune"],
+a:0,
+e:"x=0 est une asymptote verticale."
+},
+
+{
+section:"4. Limites & asymptotes",
+q:"Pour f(x)=1/x, l'axe des abscisses est une asymptote :",
+c:["horizontale","verticale","oblique","aucune"],
+a:0,
+e:"y=0 est une asymptote horizontale."
+},
+
+{
+section:"4. Limites & asymptotes",
+q:"lim(x→+∞) (2x²-x+1) vaut :",
+c:["+∞","-∞","0","1"],
+a:0,
+e:"Le terme dominant 2x² tend vers +∞."
+},
+
+{
+section:"4. Limites & asymptotes",
+q:"lim(x→-∞) x³ vaut :",
+c:["-∞","+∞","0","1"],
+a:0,
+e:"Une puissance impaire conserve le signe : x³→−∞."
+},
+
+{
+section:"4. Limites & asymptotes",
+q:"La droite y=3 est une asymptote horizontale de f si :",
+c:["lim(x→±∞) f(x)=3","f(3)=0","f(x)=3 pour tout x","lim(x→3)f(x)=0"],
+a:0,
+e:"Une asymptote horizontale y=L correspond à une limite L à l'infini."
+},
+
+{
+section:"4. Limites & asymptotes",
+q:"Pour f(x)=(2x+1)/(x), on peut écrire :",
+c:["f(x)=2+1/x","f(x)=x+2","f(x)=2x+1","f(x)=1+2/x"],
+a:0,
+e:"(2x+1)/x=2+1/x. Ainsi l'asymptote horizontale est y=2."
+},
+
+
+/* ============================================================
+   39–50 : DÉRIVATION, VARIATIONS & EXTREMUMS
+   ============================================================ */
+
+{
+section:"5. Dérivation, variations & extremums",
+q:"La dérivée de f(x)=x² est :",
+c:["2x","x","x²","2"],
+a:0,
+e:"(x²)'=2x."
+},
+
+{
+section:"5. Dérivation, variations & extremums",
+q:"La dérivée de f(x)=5x+2 est :",
+c:["5","2","5x","7"],
+a:0,
+e:"La dérivée de ax+b est a."
+},
+
+{
+section:"5. Dérivation, variations & extremums",
+q:"La dérivée de f(x)=x³ est :",
+c:["3x²","x²","3x","x³"],
+a:0,
+e:"(x³)'=3x²."
+},
+
+{
+section:"5. Dérivation, variations & extremums",
+q:"La dérivée de f(x)=1/x est :",
+c:["-1/x²","1/x²","-x²","1"],
+a:0,
+e:"x⁻¹ dérive en −x⁻², donc −1/x²."
+},
+
+{
+section:"5. Dérivation, variations & extremums",
+q:"Si f'(x)>0 sur un intervalle, alors f est :",
+c:["croissante","décroissante","constante","paire"],
+a:0,
+e:"Une dérivée strictement positive indique une fonction croissante."
+},
+
+{
+section:"5. Dérivation, variations & extremums",
+q:"Si f'(x)<0 sur un intervalle, alors f est :",
+c:["décroissante","croissante","constante","périodique"],
+a:0,
+e:"Une dérivée négative indique une fonction décroissante."
+},
+
+{
+section:"5. Dérivation, variations & extremums",
+q:"Le minimum de f(x)=x²+4 est :",
+c:["4","0","-4","2"],
+a:0,
+e:"x²≥0, donc x²+4≥4. Le minimum est 4."
+},
+
+{
+section:"5. Dérivation, variations & extremums",
+q:"Le maximum de f(x)=-x²+5 est :",
+c:["5","-5","0","25"],
+a:0,
+e:"−x²≤0, donc −x²+5≤5. Le maximum est 5."
+},
+
+{
+section:"5. Dérivation, variations & extremums",
+q:"Pour f(x)=x²-6x, la valeur de x où f' s'annule est :",
+c:["3","6","-3","0"],
+a:0,
+e:"f'(x)=2x−6. Donc 2x−6=0 donne x=3."
+},
+
+{
+section:"5. Dérivation, variations & extremums",
+q:"Pour f(x)=x²-6x, l'extremum est un :",
+c:["minimum","maximum","point d'inflexion","asymptote"],
+a:0,
+e:"Le coefficient de x² est positif : la parabole possède un minimum."
+},
+
+{
+section:"5. Dérivation, variations & extremums",
+q:"La dérivée de f(x)=(x+1)(x-2) est :",
+c:["2x-1","x-1","2x+1","x²-x-2"],
+a:0,
+e:"f=x²−x−2, donc f'=2x−1."
+},
+
+{
+section:"5. Dérivation, variations & extremums",
+q:"La dérivée de f(x)=√x, pour x>0, est :",
+c:["1/(2√x)","2√x","√x/2","1/x"],
+a:0,
+e:"(√x)'=1/(2√x), pour x>0."
+},
+
+
+/* ============================================================
+   51–60 : FONCTIONS AVEC ln
+   ============================================================ */
+
+{
+section:"6. Fonctions avec ln",
+q:"Le domaine de définition de ln(x) est :",
+c:["]0,+∞[","R","[0,+∞[","]-∞,0["],
+a:0,
+e:"Le logarithme népérien ln(x) est défini uniquement pour x>0."
+},
+
+{
+section:"6. Fonctions avec ln",
+q:"ln(1) vaut :",
+c:["0","1","-1","e"],
+a:0,
+e:"Par définition, ln(1)=0."
+},
+
+{
+section:"6. Fonctions avec ln",
+q:"ln(e) vaut :",
+c:["1","0","e","-1"],
+a:0,
+e:"ln et exponentielle sont des fonctions réciproques : ln(e)=1."
+},
+
+{
+section:"6. Fonctions avec ln",
+q:"ln(e²) vaut :",
+c:["2","e²","1","0"],
+a:0,
+e:"ln(e²)=2."
+},
+
+{
+section:"6. Fonctions avec ln",
+q:"ln(ab), pour a>0 et b>0, est égal à :",
+c:["ln(a)+ln(b)","ln(a)-ln(b)","ln(a)ln(b)","ln(a+b)"],
+a:0,
+e:"Propriété fondamentale : ln(ab)=ln(a)+ln(b)."
+},
+
+{
+section:"6. Fonctions avec ln",
+q:"ln(a/b), pour a>0 et b>0, est égal à :",
+c:["ln(a)-ln(b)","ln(a)+ln(b)","ln(a)/ln(b)","ln(ab)"],
+a:0,
+e:"ln(a/b)=ln(a)−ln(b)."
+},
+
+{
+section:"6. Fonctions avec ln",
+q:"La dérivée de ln(x) est :",
+c:["1/x","x","ln(x)","eˣ"],
+a:0,
+e:"(ln x)'=1/x pour x>0."
+},
+
+{
+section:"6. Fonctions avec ln",
+q:"Résoudre ln(x)=0 donne :",
+c:["x=1","x=0","x=e","x=-1"],
+a:0,
+e:"ln(x)=0 équivaut à x=e⁰=1."
+},
+
+{
+section:"6. Fonctions avec ln",
+q:"Résoudre ln(x)=2 donne :",
+c:["x=e²","x=2e","x=ln(2)","x=2"],
+a:0,
+e:"ln(x)=2 équivaut à x=e²."
+},
+
+{
+section:"6. Fonctions avec ln",
+q:"Pour x>0, ln(x) est :",
+c:["croissante","décroissante","constante","toujours négative"],
+a:0,
+e:"Sa dérivée 1/x est positive pour x>0, donc ln est strictement croissante."
+},
+
+
+/* ============================================================
+   61–68 : PYTHAGORE, THALÈS & GÉOMÉTRIE
+   ============================================================ */
+
+{
+section:"7. Pythagore, Thalès & géométrie",
+q:"Dans un triangle rectangle dont les côtés de l'angle droit mesurent 3 et 4, l'hypoténuse mesure :",
+c:["5","6","7","4"],
+a:0,
+e:"D'après Pythagore : c²=3²+4²=25, donc c=5."
+},
+
+{
+section:"7. Pythagore, Thalès & géométrie",
+q:"Dans un triangle rectangle, si l'hypoténuse mesure 13 et un côté de l'angle droit 5, l'autre côté mesure :",
+c:["12","8","10","18"],
+a:0,
+e:"x²+5²=13², donc x²=169−25=144 et x=12."
+},
+
+{
+section:"7. Pythagore, Thalès & géométrie",
+q:"Le théorème de Pythagore s'applique directement à un triangle :",
+c:["rectangle","équilatéral","isocèle quelconque","obtus quelconque"],
+a:0,
+e:"Le théorème de Pythagore concerne les triangles rectangles."
+},
+
+{
+section:"7. Pythagore, Thalès & géométrie",
+q:"Dans une configuration de Thalès avec (MN) parallèle à (BC), si AM/AB=2/5 et AC=15, alors AN vaut :",
+c:["6","7,5","10","12"],
+a:0,
+e:"AM/AB=AN/AC, donc 2/5=AN/15. Ainsi AN=15×2/5=6."
+},
+
+{
+section:"7. Pythagore, Thalès & géométrie",
+q:"Si deux triangles sont semblables avec un rapport de longueurs égal à 3, le rapport de leurs aires est :",
+c:["9","3","6","12"],
+a:0,
+e:"Les aires sont multipliées par le carré du rapport : 3²=9."
+},
+
+{
+section:"7. Pythagore, Thalès & géométrie",
+q:"L'aire d'un rectangle de longueur 8 cm et largeur 3 cm est :",
+c:["24 cm²","22 cm²","11 cm²","48 cm²"],
+a:0,
+e:"A=L×l=8×3=24 cm²."
+},
+
+{
+section:"7. Pythagore, Thalès & géométrie",
+q:"La circonférence d'un cercle de rayon r est :",
+c:["2πr","πr²","πr","2r²"],
+a:0,
+e:"Le périmètre du cercle est 2πr."
+},
+
+{
+section:"7. Pythagore, Thalès & géométrie",
+q:"L'aire d'un disque de rayon r est :",
+c:["πr²","2πr","πr","4πr²"],
+a:0,
+e:"L'aire du disque est πr²."
+},
+
+
+/* ============================================================
+   69–75 : VECTEURS & COORDONNÉES
+   ============================================================ */
+
+{
+section:"8. Vecteurs & coordonnées",
+q:"Si A(1,2) et B(4,6), alors le vecteur AB est :",
+c:["(3,4)","(5,8)","(-3,-4)","(4,3)"],
+a:0,
+e:"AB=(xB−xA,yB−yA)=(4−1,6−2)=(3,4)."
+},
+
+{
+section:"8. Vecteurs & coordonnées",
+q:"La distance entre A(0,0) et B(3,4) est :",
+c:["5","7","4","3"],
+a:0,
+e:"AB=√(3²+4²)=√25=5."
+},
+
+{
+section:"8. Vecteurs & coordonnées",
+q:"Deux vecteurs sont colinéaires si :",
+c:["leurs coordonnées sont proportionnelles","ils ont toujours la même longueur","ils sont toujours perpendiculaires","ils ont toujours une norme égale à 1"],
+a:0,
+e:"La colinéarité signifie qu'un vecteur est un multiple de l'autre."
+},
+
+{
+section:"8. Vecteurs & coordonnées",
+q:"Le milieu de A(2,4) et B(6,8) est :",
+c:["(4,6)","(8,12)","(2,2)","(3,4)"],
+a:0,
+e:"M=((2+6)/2,(4+8)/2)=(4,6)."
+},
+
+{
+section:"8. Vecteurs & coordonnées",
+q:"Si u=(2,3), alors 3u vaut :",
+c:["(6,9)","(5,6)","(2,9)","(6,3)"],
+a:0,
+e:"3u=(3×2,3×3)=(6,9)."
+},
+
+{
+section:"8. Vecteurs & coordonnées",
+q:"Si u=(2,1) et v=(3,4), alors u+v vaut :",
+c:["(5,5)","(6,4)","(1,3)","(5,4)"],
+a:0,
+e:"u+v=(2+3,1+4)=(5,5)."
+},
+
+{
+section:"8. Vecteurs & coordonnées",
+q:"Le vecteur nul a pour coordonnées :",
+c:["(0,0)","(1,1)","(-1,-1)","(0,1)"],
+a:0,
+e:"Le vecteur nul possède toutes ses composantes nulles."
+},
+
+
+/* ============================================================
+   76–85 : TRIGONOMÉTRIE
+   ============================================================ */
+
+{
+section:"9. Trigonométrie",
+q:"Dans un triangle rectangle, sin(α) est égal à :",
+c:["opposé / hypoténuse","adjacent / hypoténuse","opposé / adjacent","hypoténuse / opposé"],
+a:0,
+e:"SOH : sin=Opposé/Hypoténuse."
+},
+
+{
+section:"9. Trigonométrie",
+q:"Dans un triangle rectangle, cos(α) est égal à :",
+c:["adjacent / hypoténuse","opposé / hypoténuse","opposé / adjacent","hypoténuse / adjacent"],
+a:0,
+e:"CAH : cos=Adjacent/Hypoténuse."
+},
+
+{
+section:"9. Trigonométrie",
+q:"Dans un triangle rectangle, tan(α) est égal à :",
+c:["opposé / adjacent","adjacent / hypoténuse","opposé / hypoténuse","hypoténuse / adjacent"],
+a:0,
+e:"TOA : tan=Opposé/Adjacent."
+},
+
+{
+section:"9. Trigonométrie",
+q:"sin(30°) vaut :",
+c:["1/2","√3/2","1","0"],
+a:0,
+e:"Valeur remarquable : sin(30°)=1/2."
+},
+
+{
+section:"9. Trigonométrie",
+q:"cos(60°) vaut :",
+c:["1/2","√3/2","1","0"],
+a:0,
+e:"Valeur remarquable : cos(60°)=1/2."
+},
+
+{
+section:"9. Trigonométrie",
+q:"sin(90°) vaut :",
+c:["1","0","-1","1/2"],
+a:0,
+e:"sin(90°)=1."
+},
+
+{
+section:"9. Trigonométrie",
+q:"cos(180°) vaut :",
+c:["-1","1","0","1/2"],
+a:0,
+e:"cos(180°)=−1."
+},
+
+{
+section:"9. Trigonométrie",
+q:"Dans quel quadrant le cosinus est-il négatif et le sinus positif ?",
+c:["II","I","III","IV"],
+a:0,
+e:"Dans le deuxième quadrant, sin>0 et cos<0."
+},
+
+{
+section:"9. Trigonométrie",
+q:"Si sin(θ)=3/5 et θ est aigu, alors cos(θ) vaut :",
+c:["4/5","3/5","5/4","2/5"],
+a:0,
+e:"sin²θ+cos²θ=1. cos²θ=1−9/25=16/25, donc cosθ=4/5 puisque θ est aigu."
+},
+
+{
+section:"9. Trigonométrie",
+q:"tan(45°) vaut :",
+c:["1","0","√3","1/2"],
+a:0,
+e:"tan(45°)=1."
+},
+
+
+/* ============================================================
+   86–91 : PROBABILITÉS
+   ============================================================ */
+
+{
+section:"10. Probabilités",
+q:"Une pièce équilibrée est lancée une fois. La probabilité d'obtenir pile est :",
+c:["1/2","1/3","1/4","1"],
+a:0,
+e:"Deux issues équiprobables : Pile et Face. Donc P(Pile)=1/2."
+},
+
+{
+section:"10. Probabilités",
+q:"Un dé équilibré à six faces est lancé. La probabilité d'obtenir 4 est :",
+c:["1/6","1/4","1/2","4/6"],
+a:0,
+e:"Une seule face favorable parmi 6 : 1/6."
+},
+
+{
+section:"10. Probabilités",
+q:"Avec un dé équilibré, la probabilité d'obtenir un nombre pair est :",
+c:["1/2","1/3","2/3","1/6"],
+a:0,
+e:"Les nombres pairs sont 2,4,6 : 3 issues sur 6, donc 1/2."
+},
+
+{
+section:"10. Probabilités",
+q:"Si P(A)=0,3, alors P(non A) vaut :",
+c:["0,7","0,3","1,3","-0,3"],
+a:0,
+e:"P(A complémentaire)=1−P(A)=1−0,3=0,7."
+},
+
+{
+section:"10. Probabilités",
+q:"Une urne contient 3 boules rouges et 2 bleues. On tire une boule au hasard. P(rouge) vaut :",
+c:["3/5","2/5","3/2","1/3"],
+a:0,
+e:"Il y a 3 rouges sur 5 boules : 3/5."
+},
+
+{
+section:"10. Probabilités",
+q:"Deux événements A et B sont indépendants si :",
+c:["P(A∩B)=P(A)P(B)","P(A∩B)=P(A)+P(B)","P(A)=P(B)","P(A∩B)=0"],
+a:0,
+e:"Pour deux événements indépendants, P(A∩B)=P(A)P(B)."
+},
+
+
+/* ============================================================
+   92–95 : LOGIQUE
+   ============================================================ */
+
+{
+section:"11. Logique : implication, équivalence, nécessaire/suffisante",
+q:"L'implication « A entraîne B » s'écrit :",
+c:["A ⇒ B","A ⇔ B","A = B","A + B"],
+a:0,
+e:"Le symbole ⇒ représente l'implication."
+},
+
+{
+section:"11. Logique : implication, équivalence, nécessaire/suffisante",
+q:"L'équivalence entre A et B s'écrit :",
+c:["A ⇔ B","A ⇒ B","A > B","A+B"],
+a:0,
+e:"A⇔B signifie que A et B sont équivalentes : A entraîne B et B entraîne A."
+},
+
+{
+section:"11. Logique : implication, équivalence, nécessaire/suffisante",
+q:"La condition x>5 est-elle suffisante pour avoir x>2 ?",
+c:["Oui","Non","Seulement x=5","Seulement x<5"],
+a:0,
+e:"Tout x>5 est automatiquement supérieur à 2. C'est donc une condition suffisante."
+},
+
+{
+section:"11. Logique : implication, équivalence, nécessaire/suffisante",
+q:"Pour avoir x²>0, la condition x≠0 est :",
+c:["nécessaire et suffisante","seulement suffisante","seulement nécessaire","ni nécessaire ni suffisante"],
+a:0,
+e:"x²>0 exactement lorsque x≠0. La condition est donc nécessaire et suffisante."
+},
+
+
+/* ============================================================
+   96–100 : SUITES ARITHMÉTIQUES & GÉOMÉTRIQUES
+   ============================================================ */
+
+{
+section:"12. Suites arithmétiques & géométriques",
+q:"Une suite arithmétique de premier terme u₁=3 et de raison 4 a pour u₂ :",
+c:["7","12","4","1"],
+a:0,
+e:"u₂=u₁+r=3+4=7."
+},
+
+{
+section:"12. Suites arithmétiques & géométriques",
+q:"Une suite arithmétique de premier terme u₁=5 et de raison 3 a pour u₅ :",
+c:["17","20","15","12"],
+a:0,
+e:"u₅=u₁+(5−1)r=5+4×3=17."
+},
+
+{
+section:"12. Suites arithmétiques & géométriques",
+q:"Une suite géométrique de premier terme u₁=2 et de raison 3 a pour u₂ :",
+c:["6","5","9","8"],
+a:0,
+e:"u₂=u₁×q=2×3=6."
+},
+
+{
+section:"12. Suites arithmétiques & géométriques",
+q:"Une suite géométrique de premier terme u₁=2 et de raison 2 a pour u₅ :",
+c:["32","16","10","8"],
+a:0,
+e:"u₅=u₁×q⁴=2×2⁴=2×16=32."
+},
+
+{
+section:"12. Suites arithmétiques & géométriques",
+q:"La suite 4, 7, 10, 13, ... est :",
+c:["arithmétique de raison 3","géométrique de raison 3","arithmétique de raison 4","géométrique de raison 4"],
+a:0,
+e:"On ajoute toujours 3 : 7−4=3, 10−7=3, 13−10=3."
+}
+
+];
+
+
+/* ============================================================
+   VÉRIFICATIONS AUTOMATIQUES
+   ============================================================ */
+
+if(questions.length !== 100){
+  throw new Error(
+    "ERREUR : le test doit contenir exactement 100 questions. Nombre trouvé : "
+    + questions.length
+  );
+}
+
+questions.forEach((item,index)=>{
+  if(
+    !item.q ||
+    !Array.isArray(item.c) ||
+    item.c.length !== 4 ||
+    typeof item.a !== "number" ||
+    item.a < 0 ||
+    item.a > 3 ||
+    !item.e
+  ){
+    throw new Error(
+      "Question mal configurée : " + (index+1)
+    );
+  }
+});
+
+
+/* ============================================================
+   ÉTAT DU TEST
+   ============================================================ */
+
+let candidate="";
+let current=0;
+let selected=null;
+let answers=Array(100).fill(null);
+
+let questionTimer=null;
+let globalTimer=null;
+
+let remaining=60;
+let startTime=0;
+let finished=false;
+
+
+/* ============================================================
+   OUTILS
+   ============================================================ */
+
+function formatTime(seconds){
+  seconds=Math.max(0,Math.floor(seconds));
+
+  const m=Math.floor(seconds/60);
+  const s=seconds%60;
+
+  return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+
+/* Mélange les propositions sans perdre la bonne réponse */
+
+function shuffleChoices(item){
+
+  const arr=item.c.map((text,index)=>({
+    text:text,
+    original:index
+  }));
+
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+
+  return arr;
+}
+
+
+/* ============================================================
+   DÉMARRER
+   ============================================================ */
+
+function startTest(){
+
+  const input=document.getElementById("candidate");
+
+  candidate=input.value.trim();
+
+  if(!candidate){
+    alert("Entre ton nom complet avant de commencer.");
+    input.focus();
+    return;
+  }
+
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("header").classList.remove("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+
+  startTime=Date.now();
+
+  startGlobalTimer();
+
+  renderQuestion();
+}
+
+
+/* ============================================================
+   CHRONOMÈTRE GLOBAL
+   ============================================================ */
+
+function startGlobalTimer(){
+
+  clearInterval(globalTimer);
+
+  globalTimer=setInterval(()=>{
+
+    if(finished)return;
+
+    const elapsed=Math.floor(
+      (Date.now()-startTime)/1000
+    );
+
+    document.getElementById("globalTimer")
+      .textContent=formatTime(elapsed);
+
+  },1000);
+}
+
+
+/* ============================================================
+   AFFICHER UNE QUESTION
+   ============================================================ */
+
+function renderQuestion(){
+
+  clearInterval(questionTimer);
+
+  selected=null;
+  remaining=60;
+
+  const item=questions[current];
+
+  document.getElementById("qNumber").textContent=
+    "Question "+(current+1)+" / 100";
+
+  document.getElementById("sectionBadge").textContent=
+    item.section;
+
+  document.getElementById("questionText").textContent=
+    item.q;
+
+  const options=document.getElementById("options");
+
+  options.innerHTML="";
+
+  const choices=shuffleChoices(item);
+
+  window.currentChoices=choices;
+
+  choices.forEach((choice,index)=>{
+
+    const button=document.createElement("button");
+
+    button.className="option";
+
+    button.innerHTML=
+      '<span class="option-letter">'+
+      String.fromCharCode(65+index)+
+      '</span>'+
+      choice.text;
+
+    button.onclick=()=>selectAnswer(index);
+
+    options.appendChild(button);
+
+  });
+
+  updateProgress();
+
+  updateQuestionTimer();
+
+  questionTimer=setInterval(()=>{
+
+    remaining--;
+
+    updateQuestionTimer();
+
+    if(remaining<=0){
+
+      clearInterval(questionTimer);
+
+      if(selected===null){
+        answers[current]=null;
+      }
+
+      nextQuestion();
+    }
+
+  },1000);
+}
+
+
+/* ============================================================
+   TIMER QUESTION
+   ============================================================ */
+
+function updateQuestionTimer(){
+
+  document.getElementById("questionTimer")
+    .textContent=formatTime(remaining);
+
+  const timer=document.getElementById("questionTimer");
+
+  if(remaining<=10){
+    timer.style.color="#f87171";
+  }else{
+    timer.style.color="white";
+  }
+}
+
+
+/* ============================================================
+   SÉLECTION
+   ============================================================ */
+
+function selectAnswer(index){
+
+  selected=index;
+
+  answers[current]=
+    window.currentChoices[index].original;
+
+  const buttons=document.querySelectorAll(".option");
+
+  buttons.forEach((button,i)=>{
+    button.classList.toggle(
+      "selected",
+      i===index
+    );
+  });
+}
+
+
+/* ============================================================
+   QUESTION SUIVANTE
+   ============================================================ */
+
+function nextQuestion(){
+
+  clearInterval(questionTimer);
+
+  if(current>=99){
+
+    finishTest();
+
+    return;
+  }
+
+  current++;
+
+  renderQuestion();
+}
+
+
+/* ============================================================
+   PROGRESSION
+   ============================================================ */
+
+function updateProgress(){
+
+  const percent=((current+1)/100)*100;
+
+  document.getElementById("progressBar")
+    .style.width=percent+"%";
+}
+
+
+/* ============================================================
+   FIN DU TEST
+   ============================================================ */
+
+function finishTest(){
+
+  if(finished)return;
+
+  finished=true;
+
+  clearInterval(questionTimer);
+  clearInterval(globalTimer);
+
+  document.getElementById("header")
+    .classList.add("hidden");
+
+  document.getElementById("quiz")
+    .classList.add("hidden");
+
+  document.getElementById("result")
+    .classList.remove("hidden");
+
+  calculateResults();
+}
+
+
+/* ============================================================
+   RÉSULTATS
+   ============================================================ */
+
+function calculateResults(){
+
+  let score=0;
+
+  const stats={};
+
+  questions.forEach((item,i)=>{
+
+    if(!stats[item.section]){
+      stats[item.section]={
+        total:0,
+        correct:0
+      };
+    }
+
+    stats[item.section].total++;
+
+    if(answers[i]===item.a){
+      score++;
+      stats[item.section].correct++;
+    }
+
+  });
+
+  const percentage=score;
+
+  const elapsed=Math.floor(
+    (Date.now()-startTime)/1000
+  );
+
+  let html="";
+
+  html+=`
+    <div class="result-score">
+      <div>Résultat de ${escapeHtml(candidate)}</div>
+      <div class="score-big">${score}/100</div>
+      <strong>${percentage}%</strong>
+      <p>Temps utilisé : ${formatTime(elapsed)}</p>
+    </div>
+  `;
+
+  html+=`
+    <h2>📊 Résultats par chapitre</h2>
+    <div class="subject-grid">
+  `;
+
+  Object.keys(stats).forEach(section=>{
+
+    const s=stats[section];
+
+    html+=`
+      <div class="subject">
+        <strong>${s.correct}/${s.total}</strong>
+        <span>${escapeHtml(section.split(".")[1] || section)}</span>
+      </div>
+    `;
+
+  });
+
+  html+=`</div>`;
+
+  let wrong=0;
+
+  questions.forEach((item,i)=>{
+
+    if(answers[i]!==item.a){
+
+      wrong++;
+
+      const userAnswer=
+        answers[i]===null
+        ? "Aucune réponse"
+        : item.c[answers[i]];
+
+      html+=`
+        <div class="error">
+          <strong>Question ${i+1}</strong>
+          <p>${escapeHtml(item.q)}</p>
+
+          <div class="your-answer">
+            Ta réponse :
+            ${escapeHtml(userAnswer)}
+          </div>
+
+          <div class="correct">
+            Bonne réponse :
+            ${escapeHtml(item.c[item.a])}
+          </div>
+
+          <div class="explanation">
+            <strong>Explication :</strong>
+            ${escapeHtml(item.e)}
+          </div>
+        </div>
+      `;
+    }
+
+  });
+
+  if(wrong===0){
+
+    html+=`
+      <div class="info">
+        🎉 Excellent ! Tu as répondu correctement aux
+        100 questions.
+      </div>
+    `;
+
+  }else{
+
+    html=`
+      <h2 class="section-title">
+        ❌ Corrections — ${wrong} erreur(s)
+      </h2>
+    `+html.substring(
+      html.indexOf('<div class="error">')
+    );
+
+  }
+
+  html+=`
+    <div style="text-align:center;margin-top:30px">
+      <button class="primary" onclick="location.reload()">
+        RECOMMENCER
+      </button>
+    </div>
+
+    <p style="text-align:center;color:#64748b;margin-top:25px">
+      PRÉPA EXCELLENTIA WANTANSHI — by Nathan
+    </p>
+  `;
+
+  document.getElementById("resultContent").innerHTML=html;
+}
+
+
+/* ============================================================
+   SÉCURITÉ HTML POUR LE NOM / TEXTES
+   ============================================================ */
+
+function escapeHtml(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
+/* ============================================================
+   EMPÊCHER LE RETOUR ARRIÈRE PENDANT LE TEST
+   ============================================================ */
+
+history.pushState(null,"",location.href);
+
+window.addEventListener("popstate",()=>{
+
+  if(!finished){
+    history.pushState(null,"",location.href);
+    alert("Tu ne peux pas revenir en arrière pendant le test.");
+  }
+
+});
+
+
+/* ============================================================
+   AVERTISSEMENT SI L'UTILISATEUR QUITTE LA PAGE
+   ============================================================ */
+
+window.addEventListener("beforeunload",(event)=>{
+
+  if(!finished){
+
+    event.preventDefault();
+    event.returnValue="";
+
+  }
+
+});
+
+
+/* ============================================================
+   DÉTECTION DE CHANGEMENT D'ONGLET
+   ============================================================ */
+
+document.addEventListener("visibilitychange",()=>{
+
+  if(
+    document.hidden &&
+    !finished &&
+    !document.getElementById("quiz")
+      .classList.contains("hidden")
+  ){
+
+    setTimeout(()=>{
+
+      if(document.hidden)return;
+
+      alert(
+        "⚠️ Tentative de sortie détectée. " +
+        "Le test continue."
+      );
+
+    },100);
+
+  }
+
+});
+
+
+/* ============================================================
+   TOUCHE ENTRÉE SUR LE NOM
+   ============================================================ */
+
+document.getElementById("candidate")
+.addEventListener("keydown",(event)=>{
+
+  if(event.key==="Enter"){
+    startTest();
+  }
+
+});
+
+</script>
+
+</body>
+  </html>
